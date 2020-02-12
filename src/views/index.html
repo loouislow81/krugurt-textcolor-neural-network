@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<!--
+  Krugurt, a frontend toolkit to craft elegant and beautiful html component UI.
+  ~ Github (https://github.com/loouislow81/krugurt)
+-->
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+
+    <title>
+      Krugurt
+    </title>
+
+    <meta name="description"
+          content="Put your description here.">
+
+
+    <!-- pwa -->
+    <link rel="manifest"
+          href="manifest.json">
+    <!--// pwa -->
+
+
+    <!-- prefetcher -->
+    <link rel="dns-prefetch"
+          href="//">
+    <!--// prefetcher -->
+
+
+    <!-- favicon -->
+    <meta name="msapplication-TileColor"
+          content="#ffffff">
+
+    <meta name="msapplication-TileImage"
+          content="assets/image/high/favicon/ms-icon-144x144.png">
+
+    <meta name="theme-color"
+          content="#ffffff">
+
+    <link rel="apple-touch-icon"
+          sizes="57x57"
+          href="assets/image/high/favicon/apple-icon-57x57.png">
+
+    <link rel="apple-touch-icon"
+          sizes="60x60"
+          href="assets/image/high/favicon/apple-icon-60x60.png">
+
+    <link rel="apple-touch-icon"
+          sizes="72x72"
+          href="assets/image/high/favicon/apple-icon-72x72.png">
+
+    <link rel="apple-touch-icon"
+          sizes="76x76"
+          href="assets/image/high/favicon/apple-icon-76x76.png">
+
+    <link rel="apple-touch-icon"
+          sizes="114x114"
+          href="assets/image/high/favicon/apple-icon-114x114.png">
+
+    <link rel="apple-touch-icon"
+          sizes="120x120"
+          href="assets/image/high/favicon/apple-icon-120x120.png">
+
+    <link rel="apple-touch-icon"
+          sizes="144x144"
+          href="assets/image/high/favicon/apple-icon-144x144.png">
+
+    <link rel="apple-touch-icon"
+          sizes="152x152"
+          href="assets/image/high/favicon/apple-icon-152x152.png">
+
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="assets/image/high/favicon/apple-icon-180x180.png">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="assets/image/high/favicon/android-icon-192x192.png">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="assets/image/high/favicon/favicon-32x32.png">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="96x96"
+          href="assets/image/high/favicon/favicon-96x96.png">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="assets/image/high/favicon/favicon-16x16.png">
+    <!--// favicon -->
+
+
+    <!-- !! default -->
+    <link defer href="assets/css/style.css"
+          rel="stylesheet"
+          rel="preload"
+          as="style"
+          media="all">
+    <!--// !! default -->
+
+  </head>
+
+  <body class="h-full"
+        id="bgColor">
+
+    <!-- !! default -->
+    <!-- if javascript is not enabled on client side -->
+    <noscript>
+      <y class="max-w-md">
+        <y class="m-4 p-10 text-md text-charcoal-100 bg-white rounded-lg shadow-lg">
+          &#9785; You need to enable <strong>Javascript</strong> on your web browser to view this content.
+        </y>
+      </y>
+    </noscript>
+    <!--// !! default -->
+
+
+    <!-- ///////// your content start here ///////// -->
+
+    <!-- mount your component inside the body -->
+
+    <y class="relative px-10 py-20 flex justify-center items-center"
+       id="textColor">
+
+      <y class="absolute top-0 left-0">
+        <y class="p-4 text-md opacity-50">
+
+          <span class="font-semibold">
+            Krugurt
+          </span>
+
+          Sigmoid Neuron Network
+
+          <y class="text-sm">
+
+            Based on the image average RGB color is
+
+            <span class="underline"
+                  id="textRgb">
+            </span>,
+
+            then predicted text color is
+
+            <span class="underline"
+                  id="textResult">
+            </span>.
+
+          </y>
+
+        </y>
+      </y>
+
+      <!--samples-->
+
+      <!--pexels-photo-3597111.jpeg-->
+      <!--pexels-photo-3619784.jpeg-->
+      <!--pexels-photo-3631430.jpeg-->
+      <!--pexels-photo-3312671.jpeg-->
+      <!--pexels-photo-3473492.jpeg-->
+
+      <y class="relative p-10">
+
+        <img class="adaptive w-full h-auto rounded shadow-lg overflow-hidden"
+             src="assets/image/low/dummy/pexels-photo-3597111.jpeg"
+             data-src="assets/image/high/dummy/pexels-photo-3597111.jpeg"
+             id="imageInput">
+
+        <y class="absolute top-0 left-0 p-20">
+
+          <block-text
+            text="Text color (black/white) changed adaptively against the background image color">
+          </block-text>
+
+        </y>
+
+      </y>
+
+    </y>
+
+
+    <!-- ///////// your content end here ///////// -->
+
+
+    <!-- !! default -->
+    <script src="assets/js/scripts.min.js"></script>
+
+
+    <!-- krunch: components to compile -->
+    <script async data-src="components/block/text.html"
+            type="krunch"></script>
+
+
+    <!-- krunch: environment -->
+    <script>
+
+      // (speedtest) remove for production!
+      // let = startTrackCompile = performance.now();
+
+      (async function main() {
+        await krunch.compile() // init compiler
+
+
+        // add 3rd-party critical assets
+        // into service worker
+        // (!!) all local assets added by default
+        // const assets = [] // url or file path
+        // krunch.addCache(assets)
+
+
+        const components = 'block-text'
+        krunch.mount(components) // mount components
+
+
+        // krunch.lang() // init localization
+        // krunch.probeConnection() // check connection
+        // krunch.networkSpeed() // show network speed
+
+
+      }())
+
+      // (speedtest) remove for production!
+      // let = endTrackCompile = performance.now();
+      // console.log(`krugurt: (speed) (compiler) ${endTrackCompile - startTrackCompile} ms`);
+
+    </script>
+    <!--// !! default -->
+
+  </body>
+
+</html>

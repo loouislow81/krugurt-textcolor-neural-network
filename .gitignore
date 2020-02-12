@@ -1,0 +1,14 @@
+node_modules/
+dist/
+
+*.DS_Store
+
+package-lock.json
+yarn-lock.json
+pnpm-lock.json
+
+.c9
+.vscode
+
+git-rebase-refactor.sh
+logs.txt
