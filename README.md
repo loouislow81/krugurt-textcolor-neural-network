@@ -9,10 +9,12 @@
 
 Change text color contrast against background image average color with machine learning on web browser with [krugurt.js](https://github.com/loouislow81/krugurt).
 
-#### __nn settings
 
-- input layer ~ `3` (RRR, GGG, BBB).
-- hidden layer ~ `3`.
+
+#### __network settings
+
+- input layer ~ `3` (R,G,B).
+- hidden layer ~ `3`
 - output layer ~ `2` (isWhite, isBlack).
 - activation function ~ `Sigmoid`.
 - learning rate ~ `0.1`.
@@ -37,10 +39,10 @@ use the included sample image files for testing in `/src/views/index.html`,
 
 ...
 
-  <img class="adaptive w-full h-auto rounded shadow-lg overflow-hidden"
+  <img class="..."
        src="assets/image/low/dummy/pexels-photo-3597111.jpeg"
        data-src="assets/image/high/dummy/pexels-photo-3597111.jpeg"
-       id="imageInput">
+       id="...">
 
 ...
 ```
