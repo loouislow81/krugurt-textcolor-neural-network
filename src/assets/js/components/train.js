@@ -88,7 +88,7 @@ function predict() {
   } else {
     log("(NN) trained threshold value", rgbSum + " is smaller than " + threshold);
   }
-  log("(NN) output result", outputs);
+  log("(NN) output score", outputs);
   if (outputs[0] > outputs[1]) {
     foregroundColor.style.color = isBlack;
     foregroundColor.style.textShadow = "0px 0px 5px #ffffff";
