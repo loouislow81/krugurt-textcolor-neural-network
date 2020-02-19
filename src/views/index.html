@@ -112,7 +112,7 @@
 
   </head>
 
-  <body class="h-full"
+  <body class="h-full bg-charcoal-100"
         id="bgColor">
 
     <!-- !! default -->
@@ -135,52 +135,35 @@
        id="textColor">
 
       <y class="absolute top-0 left-0">
-        <y class="p-4 text-md opacity-50">
 
-          <span class="font-semibold">
-            Krugurt
-          </span>
+        <block-detail
+          resultrgb="textRgb"
+          resultcolor="textResult"
+          resultscore="textScore">
+        </block-detail>
 
-          Sigmoid Neural Network
-
-          <y class="text-sm">
-
-            Based on the image average RGB color is
-
-            <span class="font-semibold"
-                  id="textRgb">
-            </span>,
-
-            then predicted text color is
-
-            <span class="font-semibold uppercase"
-                  id="textResult">
-            </span>,
-
-            the neural network output score is
-
-            <span class="font-semibold"
-                  id="textNnResult">
-            </span>
-
-          </y>
-
-        </y>
       </y>
 
-      <!--samples-->
+      <!--test samples-->
 
       <!--pexels-photo-3597111.jpeg-->
       <!--pexels-photo-3619784.jpeg-->
       <!--pexels-photo-3631430.jpeg-->
       <!--pexels-photo-3312671.jpeg-->
       <!--pexels-photo-3473492.jpeg-->
+      <!--pexels-photo-50859.jpeg-->
+      <!--pexels-photo-833052.jpeg-->
+      <!--pexels-photo-845242.jpeg-->
+      <!--pexels-photo-988914.jpeg-->
+      <!--pexels-photo-688835.jpeg-->
+      <!--pexels-photo-734428.jpeg-->
+      <!--pexels-photo-890035.jpeg-->
 
       <y class="relative p-10">
 
         <img class="adaptive w-full h-auto rounded shadow-lg overflow-hidden"
-             src="assets/image/low/dummy/pexels-photo-3473492.jpeg"
-             data-src="assets/image/high/dummy/pexels-photo-3473492.jpeg"
+             src="assets/image/low/dummy/pexels-photo-734428.jpeg"
+             data-src="assets/image/high/dummy/pexels-photo-734428.jpeg"
              id="imageInput">
 
         <y class="absolute top-0 left-0 p-20">
@@ -206,6 +189,8 @@
     <!-- krunch: components to compile -->
     <script async data-src="components/block/text.html"
             type="krunch"></script>
+    <script async data-src="components/block/detail.html"
+            type="krunch"></script>
 
 
     <!-- krunch: environment -->
@@ -225,7 +210,7 @@
         // krunch.addCache(assets)
 
 
-        const components = 'block-text'
+        const components = 'block-text, block-detail'
         krunch.mount(components) // mount components
 
 

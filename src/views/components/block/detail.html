@@ -1,0 +1,49 @@
+<block-detail>
+
+  <y class="p-4 text-md opacity-50">
+
+    <span class="font-semibold">
+      Krugurt
+    </span>
+
+    Sigmoid Neural Network
+
+    <y class="text-sm">
+
+      Image average RGB color is
+
+      <span class="font-semibold"
+            id="{ props.resultrgb }">
+      </span>,
+
+      then predicted text color is
+
+      <span class="font-semibold uppercase"
+            id="{ props.resultcolor }">
+      </span>,
+
+      the neural network output score is
+
+      <span class="font-semibold tracking-wide"
+            id="{ props.resultscore }">
+      </span>
+
+    </y>
+
+  </y>
+
+
+  <script>
+    export default {
+      onMounted() {
+
+        // start trigger!
+        // see `assets/js/components/train.js`
+        train()
+        predict()
+
+      }
+    }
+  </script>
+
+</block-detail>
