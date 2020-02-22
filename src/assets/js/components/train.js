@@ -3,26 +3,27 @@
 const image = document.getElementById("imageInput");
 const rgb = extractColor(image);
 
-let r,g ,b;
+let r, g, b;
 
 // set rgb color in an array
 const inputs = dataset();
 
-// set neurons for each layers
-const inputLayer = 3; // (R,G,B)
-const hiddenLayer = 3; // value set in between inputLayer and outputLayer
-const outputLayer = 2; // 2 results, either is black or white
+const nn = {
+  // set neurons for each layers
+  inputLayer: 3,  // (R,G,B)
+  hiddenLayer: 3, // value set in between inputLayer and outputLayer
+  outputLayer: 2,  // 2 results, either is black or white
 
-// set network settings in an array
-const layers = nnlayers();
+  // set training
+  // learning_rate by default is 0.1
+  // activation function is sigmoid
+  calibrate: {
+    iteration: 100,
+    threshold: 300
+  }
+};
 
-const nn = new NeuralNetwork(inputLayer, hiddenLayer, outputLayer);
-
-// set training
-// learning_rate by default is 0.1
-// activation function is sigmoid
-const iteration = 100;
-const threshold = 300;
+const ml = new NeuralNetwork(nn.inputLayer, nn.hiddenLayer, nn.outputLayer);
 
 
 function dataset() {
@@ -33,16 +34,8 @@ function dataset() {
 }
 
 
-function nnlayers() {
-  let inp_ = inputLayer;
-  let hid_ = hiddenLayer;
-  let out_ = outputLayer;
-  return [inp_, hid_, out_];
-}
-
-
 function train() {
-  for (let i = 0; i < iteration; i++) {
+  for (let i = 0; i < nn.calibrate.iteration; i++) {
 
     const inputs = dataset();
     let supervised_target;
@@ -52,7 +45,7 @@ function train() {
     // if t value is bigger than either A or B,
     // label [1,0] is a bigger-than is black,
     // label [0,1] is a smaller-than is white.
-    if (inputs[0] + inputs[1] + inputs[2] > threshold) {
+    if (inputs[0] + inputs[1] + inputs[2] > nn.calibrate.threshold) {
       supervised_target = [1, 0];
     }
     else {
@@ -61,66 +54,69 @@ function train() {
 
     // normalized input values to look like this,
     // [ 0.8092408156056761, 0.1491446859764432 ]
-    nn.train([
+    ml.train([
         inputs[0] / 255, // R
         inputs[1] / 255, // G
         inputs[2] / 255  // B
       ], supervised_target
     );
-    log("(NN) training... [iteration]", "");
+    log("(nn) training... [iteration]", "");
   }
 }
 
 
 function predict() {
+
+  const options = {
+    dom: {
+      foregroundColor: document.getElementById("textColor"),
+      backgroundColor: document.getElementById("bgColor"),
+      foregroundResult: document.getElementById("textResult"),
+      backgroundResult: document.getElementById("textRgb"),
+      nnResult: document.getElementById("textScore"),
+    },
+    rgbSum: inputs[0] + inputs[1] + inputs[2],
+    isWhite: "white",
+    isBlack: "black"
+  };
+
   // normalized output values to look like this,
   // [ 0.8092408156056761, 0.1491446859764432 ]
-  const outputs = nn.predict([
+  const outputs = ml.predict([
     inputs[0] / 255, // R
     inputs[1] / 255, // G
     inputs[2] / 255  // B
   ]);
 
-  const isWhite = "white";
-  const isBlack = "black";
-
-  const foregroundColor = document.getElementById("textColor");
-  const backgroundColor = document.getElementById("bgColor");
-  const foregroundResult = document.getElementById("textResult");
-  const backgroundResult = document.getElementById("textRgb");
-  const nnResult = document.getElementById("textScore");
-
-  const rgbSum = inputs[0] + inputs[1] + inputs[2];
-
-  if (rgbSum > threshold) {
-    log("(NN) trained threshold value", rgbSum + " is bigger than " + threshold);
+  if (options.rgbSum > nn.calibrate.threshold) {
+    log("(nn) (threshold)", options.rgbSum + "/" + nn.calibrate.threshold);
   } else {
-    log("(NN) trained threshold value", rgbSum + " is smaller than " + threshold);
+    log("(nn) (threshold)", options.rgbSum + "/" + nn.calibrate.threshold);
   }
-  log("(NN) output score", outputs);
+  log("(nn) (output) score", outputs);
 
   if (outputs[0] > outputs[1]) {
-    foregroundColor.style.color = isBlack;
-    foregroundColor.style.textShadow = "0 0 5px #ffffff";
-    backgroundColor.style.backgroundColor = "rgb(" + inputs + ")";
-    foregroundResult.innerHTML = isBlack;
-    backgroundResult.innerHTML = inputs;
-    nnResult.innerHTML = "[" + outputs + "]";
-    log("(NN) predicted text color is", isBlack);
+    options.dom.foregroundColor.style.color = options.isBlack;
+    options.dom.foregroundColor.style.textShadow = "0 0 5px #ffffff";
+    options.dom.backgroundColor.style.backgroundColor = "rgb(" + inputs + ")";
+    options.dom.foregroundResult.innerHTML = options.isBlack;
+    options.dom.backgroundResult.innerHTML = inputs;
+    options.dom.nnResult.innerHTML = "[" + outputs + "]";
+    log("(nn) (output) predicted color is", options.isBlack);
   }
   else {
-    foregroundColor.style.color = isWhite;
-    foregroundColor.style.textShadow = "0 0 5px #000000";
-    backgroundColor.style.backgroundColor = "rgb(" + inputs + ")";
-    foregroundResult.innerHTML = isWhite;
-    backgroundResult.innerHTML = inputs;
-    nnResult.innerHTML = "[" + outputs + "]";
-    log("(NN) predicted text color is", isWhite);
+    options.dom.foregroundColor.style.color = options.isWhite;
+    options.dom.foregroundColor.style.textShadow = "0 0 5px #000000";
+    options.dom.backgroundColor.style.backgroundColor = "rgb(" + inputs + ")";
+    options.dom.foregroundResult.innerHTML = options.isWhite;
+    options.dom.backgroundResult.innerHTML = inputs;
+    options.dom.nnResult.innerHTML = "[" + outputs + "]";
+    log("(nn) (output) predicted color ~", options.isWhite);
   }
 }
 
 
-log("(Image) average color RGB:", inputs);
-log("(NN) properties:", nn);
+log("(image) (input) average color RGB:", inputs);
+log("(nn) properties:", ml);
 
 
