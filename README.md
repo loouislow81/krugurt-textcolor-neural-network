@@ -16,10 +16,10 @@
 </p>
 
 <p align="left">
-  <img src="Screenshot_01.png" width="420">
-  <img src="Screenshot_02.png" width="420">
-  <img src="Screenshot_03.png" width="420">
-  <img src="Screenshot_04.png" width="420">
+  <img src="assets/Screenshot_01.png" width="420">
+  <img src="assets/Screenshot_02.png" width="420">
+  <img src="assets/Screenshot_03.png" width="420">
+  <img src="assets/Screenshot_04.png" width="420">
 </p>
 
 Change text color contrast against background image average color with machine learning on web browser with [krugurt.js](https://github.com/loouislow81/krugurt).
